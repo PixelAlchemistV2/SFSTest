@@ -1,0 +1,770 @@
+{
+	"info": {
+		"_postman_id": "0258904a-1352-4fd1-be77-852e4131645b",
+		"name": "SFSTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Service1Tests",
+			"item": [
+				{
+					"name": "Service1GetFirstApp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Service1GetFirstApp\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    //Identifying info\r",
+									"    pm.expect(jsonData.applicationId).to.eql(1001500);\r",
+									"    pm.expect(jsonData.customerName).to.eql(\"SSYL TYHGGSF\")\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7071/api/GetCreditReport?applicationId=1001500&source=ABC&bureau=EFX",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7071",
+							"path": [
+								"api",
+								"GetCreditReport"
+							],
+							"query": [
+								{
+									"key": "applicationId",
+									"value": "1001500"
+								},
+								{
+									"key": "source",
+									"value": "ABC"
+								},
+								{
+									"key": "bureau",
+									"value": "EFX"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Service1GetSecondApp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Service1GetSecondApp\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    //Identifying info\r",
+									"    pm.expect(jsonData.applicationId).to.eql(1001501);\r",
+									"    pm.expect(jsonData.customerName).to.eql(\"DFYTTE XYXLYH\")\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7071/api/GetCreditReport?applicationId=1001501&source=ABC&bureau=EFX",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7071",
+							"path": [
+								"api",
+								"GetCreditReport"
+							],
+							"query": [
+								{
+									"key": "applicationId",
+									"value": "1001501"
+								},
+								{
+									"key": "source",
+									"value": "ABC"
+								},
+								{
+									"key": "bureau",
+									"value": "EFX"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Service1GetThirdApp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Service1GetSecondApp\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    //Identifying info\r",
+									"    pm.expect(jsonData.applicationId).to.eql(2001523);\r",
+									"    pm.expect(jsonData.customerName).to.eql(\"ASPPL QADFAD\")\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7071/api/GetCreditReport?applicationId=2001523&source=ABC&bureau=EFX",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7071",
+							"path": [
+								"api",
+								"GetCreditReport"
+							],
+							"query": [
+								{
+									"key": "applicationId",
+									"value": "2001523"
+								},
+								{
+									"key": "source",
+									"value": "ABC"
+								},
+								{
+									"key": "bureau",
+									"value": "EFX"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Service1BasicInvariants\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    pm.expect(jsonData.source).to.eql(\"ABC\")",
+							"    pm.expect(jsonData.bureau).to.eql(\"EFX\")",
+							"    pm.expect(jsonData.tradelines).to.be.an(\"array\");",
+							"    pm.expect(jsonData.tradelines.length).to.eql(4);",
+							"",
+							"    for(let i = 0; i<jsonData.tradelines.length; i++ )",
+							"    {",
+							"        pm.expect(jsonData.tradelines[i].tradelineId).to.not.eql(0);",
+							"        pm.expect(jsonData.tradelines[i].accountNumber).to.not.eql(null);",
+							"        pm.expect(jsonData.tradelines[i].accountNumber).to.not.eql(\"\");",
+							"        pm.expect(jsonData.tradelines[i].balance).to.not.eql(0);",
+							"        pm.expect(jsonData.tradelines[i].monthlyPayment).to.not.eql(0);",
+							"        pm.expect(jsonData.tradelines[i].type).to.not.eql(null);",
+							"        pm.expect(jsonData.tradelines[i].type).to.not.eql(\"\")",
+							"",
+							"        if(i == 3)",
+							"        {",
+							"            pm.expect(jsonData.tradelines[i].type).to.eql(\"SECURED\");",
+							"             pm.expect(jsonData.tradelines[i].isMortgage).to.eql(true);",
+							"        }",
+							"        else",
+							"        {",
+							"            pm.expect(jsonData.tradelines[i].type).to.eql(\"UNSECURED\");",
+							"             pm.expect(jsonData.tradelines[i].isMortgage).to.eql(false);",
+							"        }",
+							"    }",
+							"});"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Service2Tests",
+			"item": [
+				{
+					"name": "FirstApp",
+					"item": [
+						{
+							"name": "Service2GetFirstApp50k",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Service2GetFirstApp50kDTI\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    //DTI\r",
+											"    pm.expect(jsonData.debtToIncome).to.approximately(0.132,.001);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7071/api/GetDTI?AppId=1001500&AnnualIncome=50000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"GetDTI"
+									],
+									"query": [
+										{
+											"key": "AppId",
+											"value": "1001500"
+										},
+										{
+											"key": "AnnualIncome",
+											"value": "50000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Service2GetFirstApp100k Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Service2GetFirstApp100kDTI\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    //DTI\r",
+											"    pm.expect(jsonData.debtToIncome).to.approximately(0.066,.001);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7071/api/GetDTI?AppId=1001500&AnnualIncome=100000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"GetDTI"
+									],
+									"query": [
+										{
+											"key": "AppId",
+											"value": "1001500"
+										},
+										{
+											"key": "AnnualIncome",
+											"value": "100000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Service2GetFirstApp150k",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Service2GetFirstApp150kDTI\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    //DTI\r",
+											"    pm.expect(jsonData.debtToIncome).to.approximately(0.044,.001);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7071/api/GetDTI?AppId=1001500&AnnualIncome=150000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"GetDTI"
+									],
+									"query": [
+										{
+											"key": "AppId",
+											"value": "1001500"
+										},
+										{
+											"key": "AnnualIncome",
+											"value": "150000"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Service2GetFirstAppInvariants\", function () {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    //Identifying info",
+									"    pm.expect(jsonData.applicationId).to.eql(1001500);",
+									"    pm.expect(jsonData.totalUnsecuredBalance).to.eql(19243);",
+									"});"
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "SecondApp",
+					"item": [
+						{
+							"name": "Service2GetSecondApp50k",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Service2GetSecondApp50kDTI\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    //DTI\r",
+											"    pm.expect(jsonData.debtToIncome).to.approximately(0.1548,.001);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7071/api/GetDTI?AppId=1001501&AnnualIncome=50000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"GetDTI"
+									],
+									"query": [
+										{
+											"key": "AppId",
+											"value": "1001501"
+										},
+										{
+											"key": "AnnualIncome",
+											"value": "50000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Service2GetSecondApp100k Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Service2GetSecondApp100kDTI\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    //DTI\r",
+											"    pm.expect(jsonData.debtToIncome).to.approximately(0.0774,.001);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7071/api/GetDTI?AppId=1001501&AnnualIncome=100000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"GetDTI"
+									],
+									"query": [
+										{
+											"key": "AppId",
+											"value": "1001501"
+										},
+										{
+											"key": "AnnualIncome",
+											"value": "100000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Service2GetSecondApp150k",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Service2GetSecondApp150kDTI\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    //DTI\r",
+											"    pm.expect(jsonData.debtToIncome).to.approximately(0.0516,.001);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7071/api/GetDTI?AppId=1001501&AnnualIncome=150000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"GetDTI"
+									],
+									"query": [
+										{
+											"key": "AppId",
+											"value": "1001501"
+										},
+										{
+											"key": "AnnualIncome",
+											"value": "150000"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Service2GetSecondAppInvariants\", function () {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    //Identifying info",
+									"    pm.expect(jsonData.applicationId).to.eql(1001501);",
+									"    pm.expect(jsonData.totalUnsecuredBalance).to.eql(21343);",
+									"});"
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "ThirdApp",
+					"item": [
+						{
+							"name": "Service2GetThirdApp50k",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Service2GetSecondApp50kDTI\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    //DTI\r",
+											"    pm.expect(jsonData.debtToIncome).to.approximately(0.17088,.001);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7071/api/GetDTI?AppId=2001523&AnnualIncome=50000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"GetDTI"
+									],
+									"query": [
+										{
+											"key": "AppId",
+											"value": "2001523"
+										},
+										{
+											"key": "AnnualIncome",
+											"value": "50000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Service2GetThirdApp100k",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Service2GetSecondApp100kDTI\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    //DTI\r",
+											"    pm.expect(jsonData.debtToIncome).to.approximately(0.08544,.001);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7071/api/GetDTI?AppId=2001523&AnnualIncome=100000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"GetDTI"
+									],
+									"query": [
+										{
+											"key": "AppId",
+											"value": "2001523"
+										},
+										{
+											"key": "AnnualIncome",
+											"value": "100000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Service2GetThirdApp150k",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Service2GetThirdApp150kDTI\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    //DTI\r",
+											"    pm.expect(jsonData.debtToIncome).to.approximately(0.05696,.001);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7071/api/GetDTI?AppId=2001523&AnnualIncome=150000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"GetDTI"
+									],
+									"query": [
+										{
+											"key": "AppId",
+											"value": "2001523"
+										},
+										{
+											"key": "AnnualIncome",
+											"value": "150000"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Service2GetSecondAppInvariants\", function () {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    //Identifying info",
+									"    pm.expect(jsonData.applicationId).to.eql(2001523);",
+									"    pm.expect(jsonData.totalUnsecuredBalance).to.eql(23046);",
+									"});"
+								]
+							}
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Service2BasicInvariants\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    pm.expect(jsonData.tradelines).to.be.an(\"array\");",
+							"    pm.expect(jsonData.tradelines.length).to.eql(4);",
+							"    pm.expect(jsonData.numberOfUnsecuredLines).to.eql(3);",
+							"",
+							"    for(let i = 0; i<jsonData.tradelines.length; i++ )",
+							"    {",
+							"        pm.expect(jsonData.tradelines[i].tradelineId).to.not.eql(0);",
+							"        pm.expect(jsonData.tradelines[i].accountNumber).to.not.eql(null);",
+							"        pm.expect(jsonData.tradelines[i].accountNumber).to.not.eql(\"\");",
+							"        pm.expect(jsonData.tradelines[i].balance).to.not.eql(0);",
+							"        pm.expect(jsonData.tradelines[i].monthlyPayment).to.not.eql(0);",
+							"        pm.expect(jsonData.tradelines[i].type).to.not.eql(null);",
+							"        pm.expect(jsonData.tradelines[i].type).to.not.eql(\"\")",
+							"",
+							"        if(i == 3)",
+							"        {",
+							"            pm.expect(jsonData.tradelines[i].type).to.eql(\"SECURED\");",
+							"             pm.expect(jsonData.tradelines[i].isMortgage).to.eql(true);",
+							"        }",
+							"        else",
+							"        {",
+							"            pm.expect(jsonData.tradelines[i].type).to.eql(\"UNSECURED\");",
+							"             pm.expect(jsonData.tradelines[i].isMortgage).to.eql(false);",
+							"        }",
+							"    }",
+							"});"
+						]
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,1 @@
+You have to run the unit tests before you can test with postman because I use the unit tests to seed the database.

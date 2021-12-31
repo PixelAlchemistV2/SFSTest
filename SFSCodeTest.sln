@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFSServices", "SFSServices\SFSServices.csproj", "{23115352-5AEA-4321-86FD-4D54525708F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFSTests", "SFSServicesTests\SFSTests.csproj", "{FF93D750-BDDB-48E7-97AF-9B1A0F8F182E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23115352-5AEA-4321-86FD-4D54525708F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23115352-5AEA-4321-86FD-4D54525708F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23115352-5AEA-4321-86FD-4D54525708F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23115352-5AEA-4321-86FD-4D54525708F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF93D750-BDDB-48E7-97AF-9B1A0F8F182E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF93D750-BDDB-48E7-97AF-9B1A0F8F182E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF93D750-BDDB-48E7-97AF-9B1A0F8F182E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF93D750-BDDB-48E7-97AF-9B1A0F8F182E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81420337-8E6E-4075-A711-1C9D9F34B340}
+	EndGlobalSection
+EndGlobal

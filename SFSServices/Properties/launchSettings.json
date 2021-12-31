@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Service1": {
+      "commandName": "Project",
+      "commandLineArgs": "--verbose --csharp"
+    }
+  }
+}
